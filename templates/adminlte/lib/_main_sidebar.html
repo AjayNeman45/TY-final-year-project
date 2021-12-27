@@ -1,0 +1,168 @@
+{% load adminlte_helpers %}
+{%load static %}
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    {% block logo %}
+    <a href="/" class="brand-link">
+        <!-- <img src="{%static 'admin-lte/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+        {% block logo_text %}<span class="brand-text font-weight-light">Smart Society System </span>{% endblock %}
+    </a>
+    {% endblock %}
+    <!-- sidebar: style can be found in sidebar.less -->
+    <div class="sidebar">
+        <!-- Sidebar user panel -->
+        {% block user_panel %}
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{% avatar_url size=90 %}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{% firstof request.user.get_full_name request.user.username %}</a>
+            </div>
+        </div>
+        {% endblock %}
+
+        {% block form %}{% endblock %}
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        {% block nav_links_ul %}
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                {% block nav_links_outer %}
+                <li class="nav-header">{% block nav_heading %}MAIN NAVIGATION{% endblock %}</li>
+
+
+                <!-- {% block nav_links %}
+                {% endblock %} -->
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link home">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-tree-view members">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>members</p>
+                        <p><i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview bg-secondary">
+                        <li class="nav-item">
+                            <a href="/admin/members/member" class="nav-link member">
+                                <i class="nav-icon far fa-circle"></i> Society members
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/members/commiteemember" class="nav-link commiteemember">
+                                <i class="nav-icon far fa-circle"></i> Commitee members
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item has-tree-view transactions">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-money-check-alt"></i>
+                        <p>Transactions</p>
+                        <p><i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview  bg-secondary">
+                        <li class="nav-item">
+                            <a href="/admin/transactions/income" class="nav-link income">
+                                <i class="nav-icon far fa-circle"></i> Incomes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/transactions/expense" class="nav-link expense">
+                                <i class="nav-icon far fa-circle"></i> Expenses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/transactions/charges" class="nav-link charges">
+                                <i class="nav-icon far fa-circle"></i> Charges
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item complaints">
+                    <a href="/admin/complaints/complaint" class="nav-link complaint">
+                        <i class="nav-icon fas fa-headset"></i>
+                        <p>Comlpaint</p>
+                    </a>
+                </li>
+                <li class="nav-item meetings">
+                    <a href="/admin/meetings/meeting" class="nav-link meeting">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Meetings</p>
+                    </a>
+                </li>
+
+                <li class="nav-item events">
+                    <a href="/admin/events/event/" class="nav-link event">
+                        <i class="nav-icon fas fa-calendar-day"></i>
+                        <p>Events</p>
+                    </a>
+                </li>
+                <li class="nav-item book_hall">
+                    <a href="/admin/book_hall/bookhall/" class="nav-link bookhall">
+                        <i class="nav-icon fas fa-calendar-day"></i>
+                        <p>Book Hall</p>
+                    </a>
+                </li>
+                <li class="nav-item society_information">
+                    <a href="/admin/society_information/societyinformation/" class="nav-link societyinformation">
+                        <i class="nav-icon fas fa-info-circle"></i>
+                        <p>Society Information</p>
+                    </a>
+                </li>
+                {% endblock nav_links_outer %}
+            </ul>
+        </nav>
+        {% endblock nav_links_ul %}
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+<script>
+    function highlightNav() {
+
+        const path = window.location.pathname
+        var firstRoute = ""
+        var secondRoute = ""
+        var f = false;
+        for (var i = 7; i < path.length; i++) {
+            if (path[i] == "/") {
+                f = true;
+                continue;
+            }
+            if (!f) {
+                firstRoute += path[i];
+            } else {
+                secondRoute += path[i];
+            }
+        }
+        firstRoute = firstRoute.toLowerCase()
+        secondRoute = secondRoute.toLowerCase()
+
+        console.log(window.location.pathname.includes("members"))
+        if (firstRoute != "" && secondRoute != "") {
+            console.log("herer...")
+            const menuItem = document.getElementsByClassName(firstRoute)
+            menuItem[0].classList.add("menu-open")
+            const listItem = document.getElementsByClassName(secondRoute)
+            listItem[0].classList.add("active")
+        }
+        else {
+            const menuItem = document.getElementsByClassName("home")
+            menuItem[0].classList.add("active")
+        }
+    }
+    highlightNav()
+</script>
