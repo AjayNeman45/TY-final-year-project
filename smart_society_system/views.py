@@ -1,8 +1,39 @@
 from django.http.response import JsonResponse
 from members.models import CommiteeMember
+from members.models import Member
 from transactions.models import Expense
 from society_information.models import SocietyInformation
 from complaints.models import Complaint
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import get_object_or_404, redirect, render
+
+class MemberLogin(View):
+    def get(self,request):
+        if request.user.id != None:
+            return redirect("home")
+        return render(request, 'user/login.html')
+    def post(self, request):
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user:
+            login(request, user)
+            return redirect('home')
+        else:
+            return redirect("login")  
+
+class MemberLogout(View):
+    def get(self, request):
+        logout(request)    
+        return redirect('login')
+
+class Home(View):
+    def get(self,request):
+        if request.user.id == None:
+            return redirect("login")
+        Member_details = Member.objects.all()
+        context ={"Member_details": Member_details}
+        return render(request, 'user/home.html', context)
 
 def expenseData(request):
     if request.is_ajax() and request.method == 'GET':

@@ -23,7 +23,7 @@ class MembersAdmin(UserAdmin):
             'fields': ('first_name','last_name','email', 'phone_Number','profile_Photo',
                  'wing','floor_Number', 'flat_Number',
                  'flat_Type','member_Type',
-                 'is_active','is_staff')}
+                 'is_active','is_staff', 'is_superuser')}
         ),
     )
     ordering = ('id',)

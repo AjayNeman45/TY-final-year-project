@@ -1,0 +1,98 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block body %}
+{% csrf_token %}
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+                <div class="col-md-3 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
+                                        class="rounded-circle mt-5" width="150px"
+                                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                                        class="font-weight-bold">{{ member.first_name }}</span><span
+                                        class="text-black-50">{{ member.email }}</span><span> </span></div>
+                </div>
+                <div class="col-md-5 border-right">
+                        <div class="p-3 py-5">
+                                <div class="row">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="text-right">Profile Settings</h4>
+                                                <a href="#" id="edit_profile">
+                                                        <button class="btn btn-primary edit_profile" type="button"
+                                                                onclick="editProfile()">Edit
+                                                                Profile
+                                                        </button>
+                                                </a>
+                                        </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                        <div class="col-md-6"><label class="labels">Name</label><input type="text"
+                                                        class="form-control name" placeholder="first name"
+                                                        value="{{ member.first_name }}" readonly></div>
+                                        <div class="col-md-6"><label class="labels">Surname</label><input type="text"
+                                                        class="form-control surname" value="{{ member.last_name }}"
+                                                        placeholder="surname" readonly>
+                                        </div>
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-12"><label class="labels">Mobile Number</label><input
+                                                        type="text" class="form-control phone-number"
+                                                        placeholder="enter phone number"
+                                                        value="{{ member.phone_Number }}" readonly></div><br>
+                                        <div class="col-md-12"><label class="labels">Email ID</label><input type="text"
+                                                        class="form-control" placeholder="enter email id"
+                                                        value="{{ member.email }}" readonly></div><br>
+
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-6"><label class="labels">Floor Number</label><input
+                                                        type="text" class="form-control" placeholder="Floor Number"
+                                                        value="{{ member.floor_Number }}" readonly>
+                                        </div>
+                                        <div class="col-md-6"><label class="labels">Flat Number</label><input
+                                                        type="text" class="form-control"
+                                                        value="{{ member.flat_Number }}" placeholder="flat_Number"
+                                                        readonly>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-4 border-right">
+                        <div class="p-3 py-5">
+
+                                <div class="col-md-12"><label class="labels">Floor Type</label><input type="text"
+                                                class="form-control" placeholder="floor_Type"
+                                                value="{{ member.flat_Type }}" readonly>
+                                </div><br>
+                                <div class="col-md-12"><label class="labels">area</label><input type="text"
+                                                class="form-control" placeholder="area" value="{{ member.area }}"
+                                                readonly></div><br>
+                                <div class="col-md-12"><label class="labels">Member Type</label><input type="text"
+                                                class="form-control" placeholder="member_Type"
+                                                value="{{ member.member_Type }}" readonly></div>
+                                <div class="col-md-12"><label class="labels">wing</label><input type="text"
+                                                class="form-control" placeholder="wing" value="{{ member.wing }}"
+                                                readonly></div>
+                                <br>
+                        </div>
+                </div>
+        </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+        let editProfileBtn = document.getElementById("edit_profile")
+        editProfileBtn.addEventListener("click", () => {
+                console.log(document.getElementsByClassName("name"))
+                document.getElementsByClassName("name")[0].removeAttribute("readonly")
+                document.getElementsByClassName("surname")[0].removeAttribute("readonly")
+                document.getElementsByClassName("phone-number")[0].removeAttribute("readonly")
+        })
+</script>
+{% endblock %}
