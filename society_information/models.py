@@ -9,6 +9,8 @@ class SocietyInformation(models.Model):
     number_of_Residents = models.IntegerField()
     number_of_Tenants = models.IntegerField()
     number_of_Wings = models.IntegerField()
-
+    total_Area = models.IntegerField(null=True, blank=True)
+    registration_Date = models.DateField( null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
     def __str__(self):
         return self.name

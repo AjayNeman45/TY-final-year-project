@@ -1,9 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.core.mail import send_mail
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.conf import settings
+from django import forms
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
 from .models import Member
 from .managers import CustomUserManager
 import string
@@ -57,4 +56,22 @@ class CustomUserCreationForm(UserCreationForm, CustomUserManager):
 class MemberEditForm(ModelForm):
     class Meta:
         model = Member
-        fields = ['first_name','last_name','phone_Number','wing','floor_Number','flat_Number','flat_Type','area']
+        fields = ['first_name','last_name','username', 'phone_Number','email']
+
+# class ChangePasswordForm(ModelForm):
+#     password = forms.CharField()
+#     confirmPassword = forms.CharField()
+#     class Meta:
+#         model = Member
+#         fields = ["password", "confirmPassword"]
+    
+#     def cleaned_data(self):
+#         password = self.cleaned_data.get('new_password')
+#         confirmPassword =self.cleaned_data.get('reenter_password')
+#         if password != confirmPassword:
+#             raise Exception("password dosent match")
+#         return self.cleaned_data
+
+class MyChangeFormPassword(PasswordChangeForm):
+    pass
+

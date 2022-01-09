@@ -1,0 +1,153 @@
+{% extends 'user/base.html' %}
+
+{% block styles %}
+<style>
+    .filter-options a {
+        border: 1px solid gray;
+        padding: 2px 10px;
+        border-radius: 20px;
+        color: rgb(100, 100, 100);
+    }
+
+    .filter-options .active {
+        background-color: rgb(58, 57, 57);
+        color: white;
+    }
+
+    @media(max-width:580px) {
+        .book-hall-page-top {
+            flex-direction: column-reverse;
+        }
+
+        .book-hall-page-top>a {
+            margin-bottom: 1rem;
+        }
+
+        .filter-options a {
+            font-size: 13px;
+            padding: 1px 5px;
+        }
+    }
+</style>
+{% endblock %}
+
+
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="success-msg text-center py-2 bg-success mb-2">
+    <h6 class="text-white">{{message}}</h6>
+</div>
+{% endfor %}
+{% endif %}
+
+<h4>Book Hall</h4>
+<div class="book-hall-page-top d-flex align-item-center justify-content-between mt-3">
+    <div class="filter-application-section ">
+        <div class="d-flex align-item-center justify-content-center">
+            <div class="filter-options d-flex align-item-center justify-content-center mt-1">
+                <a class="mx-2 all filter-option active" href="{% url 'filter_applications' filterBy='all' %}">All</a>
+                <a class="mx-2 yours filter-option" href="{% url 'filter_applications' filterBy='yours' %}">Yours</a>
+                <a class="mx-2 approved filter-option"
+                    href="{% url 'filter_applications' filterBy='approved' %}">Approved</a>
+                <a class="mx-2 pending filter-option"
+                    href="{% url 'filter_applications' filterBy='pending' %}">Pending</a>
+                <a class="mx-2 declined filter-option"
+                    href="{% url 'filter_applications' filterBy='declined' %}">Declined</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'register_hall' %}"><button type="button" class="btn btn-primary">Book Hall</button></a>
+</div>
+<div class="card-body table-responsive p-0">
+    <table class="table mt-3" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in bookHallApplications %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{application.member.first_name}} {{application.member.last_name}}</td>
+                <td>{{application.event_Name}}</td>
+                <td>{{application.date}}</td>
+                <td>{{application.start_Time}}</td>
+                <td>{{application.end_Time}}</td>
+                <td>{{application.status}}</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Book Hall For Your Private event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="event-name" class="col-form-label">Event Name:</label>
+                        <input type="text" class="form-control shadow-none" id="event-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Date:</label>
+                        <input type='date' class="form-control shadow-none" id="date"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Start Time:</label>
+                        <input type='time' class="form-control shadow-none" id="startTime"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">End Time:</label>
+                        <input type='time' class="form-control shadow-none" id="endTime"></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    var filterOptions = document.getElementsByClassName("filter-option")
+
+    window.onload = () => {
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        var param = url.pathname.substring(11, url.pathname.length)
+        for (let i = 0; i < filterOptions.length; i++) {
+            if (filterOptions[i].classList.contains("active")) {
+                filterOptions[i].classList.remove("active")
+            }
+        }
+        if (!param) param = "all"
+        document.getElementsByClassName(param)[0].classList.add("active")
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block body %}
+<h3>Society Information</h3>
+<div class="d-flex mx-3">
+    <div>
+        <img src="{% static 'img/society-image.jpeg' %}" class="rounded-circle" alt="" width="250" height="250">
+    </div>
+    <div class="card mx-5 p-3">
+        <h3>Name :</h3>
+        <h4 class="text-gray">{{societyInfo.name}}</h4>
+        <h3>Address:</h3>
+        <h4 class="text-gray">{{societyInfo.address}}</h4>
+
+    </div>
+</div>
+
+{{societyInfo.number_of_Flats}}
+{{societyInfo.number_of_Residents}}
+{{societyInfo.number_of_Tenants}}
+{{societyInfo.number_of_Wings}}
+{% endblock %}

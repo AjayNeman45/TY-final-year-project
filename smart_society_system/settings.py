@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 import os
 
 
@@ -57,6 +58,11 @@ INSTALLED_APPS = [
     'events',
     'book_hall',
 ]
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger"
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

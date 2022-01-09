@@ -1,0 +1,46 @@
+{% extends 'user/base.html' %}
+
+{% block styles %}
+<style>
+    @media(max-width:650px) {
+        .book-hall-form {
+            width: 80vw !important;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+<div class=" w-50 m-auto book-hall-form">
+    <h3 class="text-center mb-4">Book Hall for your private event</h3>
+    {% if messages %}
+    {% for message in messages %}
+    <h6 class="text-{{message.tags}}">{{message}}</h6>
+    {% endfor %}
+    {% endif %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="col-form-label">Event Name <span class="text-danger">*</span></label>
+            <input type="text" name="event_name" class="form-control shadow-none">
+        </div>
+        <div class="mb-3">
+            <label class="col-form-label">Date <span class="text-danger">*</span></label>
+            <input type='date' name="date" class="form-control shadow-none"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="col-form-label">Start Time <span class="text-danger">*</span></label>
+            <input type='time' name="start_time" class="form-control shadow-none"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="col-form-label">End Time <span class="text-danger">*</span></label>
+            <input type='time' name="end_time" class="form-control shadow-none"></textarea>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
