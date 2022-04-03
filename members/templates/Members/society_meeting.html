@@ -1,0 +1,31 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block body %}
+{% csrf_token %}
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date And Time</th>
+        <th scope="col">Venue</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for meeting in society_meeting %}
+        <tr>
+            <td>{{meeting.title}}</td>
+            <td>{{meeting.description}}</td>
+            <td>{{meeting.date_And_Time}}</td>
+            <td>{{meeting.venue}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

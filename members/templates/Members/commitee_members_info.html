@@ -1,0 +1,30 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block body %}
+{% csrf_token %}
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Member Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">From Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for commitee_member in commitee_details %}
+    <tr>
+      <td>{{commitee_member.member.first_name}} {{commitee_member.member.last_name}}</td>
+      <td>{{commitee_member.position}}</td>
+      <td>{{commitee_member.from_Date}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

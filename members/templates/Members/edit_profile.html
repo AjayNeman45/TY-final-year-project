@@ -7,7 +7,7 @@
 <form class="middlediv row g-3" action="" method="post" style="padding: 3%;">
   {% csrf_token %}
 
-  {% for field in form %}
+  <!-- {% for field in form %}
   {% if field.name == "first_name" %}
   <label>First Name</label>
   {% elif field.name == "last_name" %}
@@ -23,9 +23,9 @@
   {% endif %}
 
   {{field}}
-  {% endfor %}
+  {% endfor %} -->
 
-  <!-- <div class="col-md-6">
+  <div class="col-md-6">
           <label for="inputEmail4" class="form-label">Name</label>
           <input type="text" class="form-control" value="{{ member.first_name }}" placeholder="Name">
         </div>
@@ -64,11 +64,11 @@
         <div class="col-md-4">
           <label for="inputZip" class="form-label">Member Type</label>
           <input type="text" class="form-control" value="{{ member.member_Type }}" placeholder="Member Type">
-        </div> -->
+        </div>
 
   <center>
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Save Profile</button>
+      <button type="submit" class="btn btn-primary">Save</button>
     </div>
   </center>
 </form>

@@ -67,7 +67,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
+                <th scope="col">Booked by</th>
                 <th scope="col">Event Name</th>
                 <th scope="col">Date</th>
                 <th scope="col">Start Time</th>
@@ -79,7 +79,10 @@
             {% for application in bookHallApplications %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{application.member.first_name}} {{application.member.last_name}}</td>
+                <td>
+                    {{application.member.first_name}}
+                    {{application.member.last_name}}
+                </td>
                 <td>{{application.event_Name}}</td>
                 <td>{{application.date}}</td>
                 <td>{{application.start_Time}}</td>

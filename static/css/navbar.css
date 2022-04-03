@@ -210,6 +210,9 @@ a.article:hover {
 .header-profile-img {
 	border-radius: 50%;
 	margin-left: 10px;
+	object-fit: cover;
+	height: 30px;
+	width: 30px;
 }
 .header-username {
 	color: black;

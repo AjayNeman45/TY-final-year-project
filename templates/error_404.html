@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/error_404.css' %}">
+    </head>
+
+    <style>
+        .container {
+            text-align: center;
+            height: 100vh;
+            margin-top: 20rem;
+        }
+
+        .container h1 {
+            font-family: 'Open-Sans', sans-serif;
+            font-size: 40px;
+        }
+
+        button {
+            width: 16rem;
+            height: 3rem;
+            background-color: rgb(223, 223, 223);
+            border: none;
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: rgb(179, 179, 179);
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <h1> 404 | Not Found </h1>
+            <a href="{% url 'home' %}"><button>Go Back To Home</button></a>
+        </div>
+
+    </body>
+
+</html>

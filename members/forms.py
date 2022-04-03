@@ -8,6 +8,7 @@ from .managers import CustomUserManager
 import string
 import random
 from django.forms import ModelForm
+from django.core.mail import send_mail
 
 def generate_pwd():
     s1 = list(string.ascii_uppercase);
@@ -38,7 +39,7 @@ class CustomUserCreationForm(UserCreationForm, CustomUserManager):
         to_email =  self.cleaned_data['email']
         html_content = render_to_string('Members/email_template.html', {'first_name': self.cleaned_data['first_name'],'last_name': self.cleaned_data['last_name'],'username':self.cleaned_data['flat_Number'], 'password': self.cleaned_data['password1']})
         text_content = strip_tags(html_content)
-        # send_mail(subject, text_content, from_email, [to_email], fail_silently=False)
+        send_mail(subject, text_content, from_email, [to_email], fail_silently=False)
 
         return super().clean()
 

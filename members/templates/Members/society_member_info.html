@@ -1,0 +1,46 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block body %}
+{% csrf_token %}
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">First name</th>
+      <th scope="col">Last_name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email Address</th>
+      <th scope="col">Wing</th>
+      <th scope="col">Floor Number</th>
+      <th scope="col">Flat Number</th>
+      <th scope="col">Flat Type</th>
+      <th scope="col">Area</th>
+      <th scope="col">Member Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for members in member_details %}
+    {% if not members.is_superuser %}
+    <tr>
+      <td>{{members.first_name}}</td>
+      <td>{{members.last_name}}</td>
+      <td>{{members.phone_Number}}</td>
+      <td>{{members.email}}</td>
+      <td>{{members.wing}}</td>
+      <td>{{members.floor_Number}}</td>
+      <td>{{members.flat_Number}}</td>
+      <td>{{members.flat_Type}}</td>
+      <td>{{members.area}}</td>
+      <td>{{members.member_Type}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

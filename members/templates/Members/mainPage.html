@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <link rel="stylesheet" href="{% static 'css/mainPage.css' %}" />
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="left">
+                <img src="{% static 'img/society-image.jpeg' %}" class="society-img" alt="" width="450" height="500">
+            </div>
+            <div class="right">
+                <h1>Welcome to <br /> <span>Saidham Co. Op. Society LDT</span></h1>
+                <h6>Sadguru nagar, Diwa(East), thane, maharashtra 400612</h6>
+                <div class="btns">
+                    <a href="{% url 'admin:index' %}">
+                        <button class="admin_login_btn">I'm Admin</button>
+                    </a>
+                    <a href="{% url 'login' %}">
+                        <button class="member_login_btn">I'm Member</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

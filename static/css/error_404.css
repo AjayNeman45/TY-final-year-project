@@ -1,0 +1,13 @@
+.ontainer {
+	position: relative;
+	height: 100vh;
+	border: 1px solid red;
+	background-color: red;
+}
+h1 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

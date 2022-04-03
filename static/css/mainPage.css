@@ -1,0 +1,64 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(231, 231, 231);
+	width: fit-content;
+	height: fit-content;
+	margin: 3rem auto;
+	padding: 3rem;
+	box-shadow: 0 0 20px 2px gray;
+	border-radius: 20px;
+}
+.society-img {
+	border-radius: 20px;
+}
+.container .right {
+	margin-left: 4rem;
+}
+.container .right h1 {
+	font-size: 35px;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
+	color: rgb(44, 44, 44);
+}
+.container .right h1 span {
+	color: tomato;
+	font-family: "Open-Sans", sans-serif;
+	font-size: 35px;
+}
+.container .right h6 {
+	font-size: 20px;
+	margin: 2rem 0;
+	font-weight: 400;
+	color: gray;
+	margin-top: -1rem;
+	/* border: 1px solid red; */
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.container .right .btns button {
+	width: 12rem;
+	height: 3rem;
+	font-size: 19px;
+	letter-spacing: 1px;
+	border: none;
+	outline: none;
+	margin-top: 1rem;
+	border-radius: 3px;
+}
+.admin_login_btn {
+	background-color: rgb(83, 83, 233);
+	color: white;
+	cursor: pointer;
+}
+.admin_login_btn:hover {
+	background-color: rgb(27, 27, 201);
+}
+.member_login_btn {
+	background-color: white;
+	margin-left: 1rem;
+	cursor: pointer;
+}
+.member_login_btn:hover {
+	background-color: rgb(211, 211, 211);
+}

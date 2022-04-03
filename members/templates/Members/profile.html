@@ -4,10 +4,29 @@
 {% block styles %}
 <style>
         .camera-icon {
+                display: none;
+                font-size: 20px;
+                margin-top: 20px;
                 cursor: pointer;
+                color: gray
+        }
+
+        .profile-img {
+                background-color: rgb(241, 241, 241);
+                border: 1px solid gray;
+                padding: 5px;
+                object-fit: cover;
+                width: 14rem;
+                height: 13.5rem;
+                cursor: pointer;
+        }
+
+        .profile-img:hover {
+                box-shadow: 0 0 10px 1px rgb(172, 172, 172);
         }
 </style>
 {% endblock %}
+
 
 {% block body %}
 {% csrf_token %}
@@ -21,15 +40,22 @@
         {% endfor %} -->
 
         <div class="row">
+
                 <div class="col-lg-3">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                <img class="rounded-circle mt-5 profile-img" width="150px"
-                                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                                {% if member.profile_Photo %}
+                                <img class="rounded-circle mt-5 profile-img" src="..{{member.profile_Photo.url}}"
+                                        alt="">
+                                {% else %}
+                                <img class="rounded-circle mt-5 profile-img" src="{% static '/img/img_avatar.png' %}"
+                                        alt="">
+                                {% endif %}
                                 <label for="upload-photo" class="camera-icon"><i class="fas fa-camera"></i></label>
-                                <input type="file" name="photo" id="upload-photo" hidden />
-                                <span class="font-weight-bold">{{ member.first_name }}
+                                <input type="file" name="photo" class="upload-photo" id="upload-photo"
+                                        onchange="addImageToPost()" hidden />
+                                <h3 class="font-weight-bold mt-2">{{ member.first_name }}
                                         {{member.last_name}}
-                                </span>
+                                </h3>
                                 <span class="text-black-50">{{ member.email }}</span><span> </span>
                         </div>
                 </div>
@@ -37,10 +63,13 @@
                         <div class="row mx-1">
                                 <div class="d-flex justify-content-between align-items-center">
                                         <h4 class="text-right">Profile </h4>
-                                        <button class="btn btn-primary edit_profile_btn" type="button"
-                                                onclick="editProfile()">Edit
-                                                Profile
+                                        {% if request.user.id == member.id %}
+                                        <a href="{% url 'edit_profile'  %}">
+                                        <button class="btn btn-primary edit_profile_btn">
+                                                Edit Profile
                                         </button>
+                                        </a>
+                                        {% endif %}
                                 </div>
                         </div>
 
@@ -48,7 +77,7 @@
                                 <div class="col-md-6">
                                         <label class="labels">Name</label>
                                         <input type="text" class="form-control name" placeholder="first name"
-                                                value="{{ member.first_name }}" readonly>
+                                                value="{{ member.first_name }}">
                                 </div>
                                 <div class="col-md-6">
                                         <label class="labels">Surname</label>
@@ -79,6 +108,7 @@
                                 </div><br>
                         </div>
                 </div>
+
                 <div class="col-lg-5  py-4">
                         <div class="row mx-1">
                                 <h4>Address</h4>

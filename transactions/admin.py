@@ -1,14 +1,18 @@
+from django import forms
 from django.contrib import admin
+
+from .forms import incomeForm
 
 from .models import *
 
 # Register your models here.
 
-@admin.register(Income)
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('id','member','member_Bank_Name','society_Bank_Name','check_Number','amount','createdAt')
+    readonly_fields = ('totalCharges', )
+    list_display = ('id','member','member_Bank_Name','society_Bank_Name','check_Number', 'createdAt', 'totalCharges')
+  
 
-
+admin.site.register(Income,IncomeAdmin)
 @admin.register(Expense)
 class  ExpenseAdmin(admin.ModelAdmin):
     list_display = ('id','title','description','amount','createdAt')

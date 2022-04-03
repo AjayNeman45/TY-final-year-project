@@ -7,7 +7,6 @@ window.onload = () => {
 			var table = document.getElementsByClassName(
 				"dashboard-commitee-member-table"
 			)
-			console.log(commiteeMembers[0])
 			commiteeMembers.map(
 				member =>
 					(table[0].innerHTML += `

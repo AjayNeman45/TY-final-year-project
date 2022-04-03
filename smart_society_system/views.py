@@ -8,11 +8,28 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+
+# from django.views.defaults import 
+
+# class MemberLogin(View):
+#     def get(self,request):
+#         if request.user.id != None:
+#             return redirect("home")
+#         return render(request, "user/login.html")
+#     def post(self, request):
+#         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+#         if user:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             return redirect("login")
+
 
 class MemberLogin(View):
     def get(self,request):
-        if request.user.id != None:
-            return redirect("home")
+        # if request.user.id != None:
+        #     return redirect("home")
         return render(request, 'user/login.html')
     def post(self, request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
@@ -20,7 +37,14 @@ class MemberLogin(View):
             login(request, user)
             return redirect('home')
         else:
-            return redirect("login")  
+            messages.error(request,'Username or Password not correct')
+            return redirect("login")
+
+
+
+
+
+
 
 class MemberLogout(View):
     def get(self, request):
@@ -30,10 +54,20 @@ class MemberLogout(View):
 class Home(View):
     def get(self,request):
         if request.user.id == None:
-            return redirect("login")
+            return redirect("main-page")
         Member_details = Member.objects.all()
         context ={"Member_details": Member_details}
         return render(request, 'user/home.html', context)
+class MainPage(View):
+    def get(self, request):
+        if request.user.id != None:
+            return redirect("home")
+        return render(request, "Members/mainPage.html")
+
+
+def handle_not_found(request, exception):
+    return render(request, "error_404.html")
+
 
 def expenseData(request):
     if request.is_ajax() and request.method == 'GET':
@@ -80,3 +114,8 @@ def complaintsData(request):
             else:
                 resolvedComplaints += 1
         return JsonResponse({"pendingComplaints":pendingComplaints, "activeComplaints":activeComplaints, "resolvedComplaints":resolvedComplaints})
+    
+
+def error_404_view(request, exception):
+    data = {"name": "ThePythonDjango.com"}
+    return render(request,'error_404.html', data)

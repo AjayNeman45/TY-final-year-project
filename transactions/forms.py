@@ -1,15 +1,11 @@
+from dataclasses import field, fields
 from django.forms import ModelForm
 from django import forms
 from .models import *
 
-months = (
-    ("1", "january"),
-    ("1", "january"),
-    ("1", "january"),
-    ("1", "january"),
-)
+
 class incomeForm(ModelForm):
-    month = forms.ChoiceField(choices=months)
+    charges = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                 choices=Charges.objects.all(), label="charges for")
     class Meta:
-        model = Income
-        fields = '__all__'
+        fields = ['charges']
